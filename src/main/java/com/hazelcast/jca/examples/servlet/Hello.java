@@ -31,7 +31,7 @@ public class Hello extends HttpServlet {
         	resp.setContentType("text/html");
         	
 		PrintWriter out = resp.getWriter();
-        	out.write("<h1>Example of Hazelcast JCA with MDB and H2 DB,  demonstrates usage of XA transactions</h1>");
+        	out.write("<h1>Example of Hazelcast JCA</h1>");
 
 		HazelcastConnection hzConn = null;
  	
