@@ -36,6 +36,7 @@ public class Hello extends HttpServlet {
 		HazelcastConnection hzConn = null;
  	
 		try {
+			hzConn = getConnection();
 			TransactionalMap<Object,Object> txmap = hzConn.getTransactionalMap("txmap");
 			if(txmap != null){
 				for(int i = 0; i<61; i++)
