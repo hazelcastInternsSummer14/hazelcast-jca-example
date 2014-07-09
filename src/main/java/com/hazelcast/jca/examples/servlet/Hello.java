@@ -32,6 +32,10 @@ public class Hello extends HttpServlet {
         	
 		PrintWriter out = resp.getWriter();
         out.write("<h1>Hazelcast JCA Example</h1>");
+        out.write("<form action='?' method='GET'><input name='action' value='put' type='hidden' /><input type='text' name='data' /><input type='submit' value='PUT' /></form>");
+        out.write("<a href='?action=clear'>CLEAR</a>");
+        out.write("<br />");
+        out.write("<br />");
 
 		HazelcastConnection hzConn = null;
  	
@@ -41,16 +45,18 @@ public class Hello extends HttpServlet {
 			IMap<Object,Object> map = hzConn.getMap("example");
 			String action = req.getParameter("action");
 
-			if(action.equals("put")) {
-				map.put(map.size(),req.getParameter("data"));
-			}
-			else if(action.equals("get")) {
-				for(int i = 0; i<map.size(); i++) {
-					out.write(i +"=>"+ map.get(i) +"<br />");
+			if(action != null) {
+				if(action.equals("put")) {
+					map.put(map.size(),req.getParameter("data"));
+				}
+				else if(action.equals("clear")) {
+					map.clear();
 				}
 			}
-			else if(action.equals("clear")) {
-				map.clear();
+
+			out.write("MAP: <br />");
+			for(int i = 0; i<map.size(); i++) {
+				out.write(i +"=>"+ map.get(i) +"<br />");
 			}
 
 			hzConn.close();
