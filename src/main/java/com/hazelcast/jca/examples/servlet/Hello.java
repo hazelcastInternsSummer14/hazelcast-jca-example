@@ -25,20 +25,20 @@ public class Hello extends HttpServlet {
 		return c;
 	}
 
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        	resp.setContentType("text/html");
-        	
+		resp.setContentType("text/html");
+
 		PrintWriter out = resp.getWriter();
-        out.write("<h1>Hazelcast JCA Example</h1>");
-        out.write("<form action='?' method='GET'><input name='action' value='put' type='hidden' /><input type='text' name='data' /><input type='submit' value='PUT' /></form>");
-        out.write("<a href='?action=clear'>CLEAR</a>");
-        out.write("<br />");
-        out.write("<br />");
+		out.write("<h1>Hazelcast JCA Example</h1>");
+		out.write("<form action='?' method='GET'><input name='action' value='put' type='hidden' /><input type='text' name='data' /><input type='submit' value='PUT' /></form>");
+		out.write("<a href='?action=clear'>CLEAR</a>");
+		out.write("<br />");
+		out.write("<br />");
 
 		HazelcastConnection hzConn = null;
- 	
+
 		try {
 			hzConn = getConnection();
 
