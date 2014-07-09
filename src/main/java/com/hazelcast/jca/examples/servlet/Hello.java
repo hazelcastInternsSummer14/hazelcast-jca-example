@@ -1,7 +1,7 @@
 package com.hazelcast.jca.examples.servlet;
 
 import javax.annotation.Resource;
-import com.hazelcast.core.TransactionalMap;
+import com.hazelcast.core.IMap;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import java.io.IOException;
@@ -31,18 +31,34 @@ public class Hello extends HttpServlet {
         	resp.setContentType("text/html");
         	
 		PrintWriter out = resp.getWriter();
-        	out.write("<h1>Example of Hazelcast JCA</h1>");
+        out.write("<h1>Hazelcast JCA Example</h1>");
 
 		HazelcastConnection hzConn = null;
  	
 		try {
 			hzConn = getConnection();
-			TransactionalMap<Object,Object> txmap = hzConn.getTransactionalMap("txmap");
-			if(txmap != null){
-				for(int i = 0; i<61; i++)
-					txmap.put(i,"Hello");
+
+			IMap<Object,Object> map = hzConn.getMap("example");
+			String action = req.getParameter("action");
+
+			if(action.equals("put")) {
+				map.put(map.size(),req.getParameter("data"));
 			}
-		} finally {
+			else if(action.equals("get")) {
+				for(int i = 0; i<map.size(); i++) {
+					out.write(i +"=>"+ map.get(i) +"<br />");
+				}
+			}
+			else if(action.equals("clear")) {
+				map.clear();
+			}
+
+			hzConn.close();
+		}
+		catch(ResourceException e) {
+
+		}
+		finally {
 			if(out != null)
 				out.close();
 		}
