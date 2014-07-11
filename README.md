@@ -9,14 +9,18 @@ You should have installed JBoss AS or JBoss EAP and Apache Maven on your system.
 `Apache Maven 3+`<br />
 `Hazelcast 3+`<br />
 
-<h2>JBoss Configuration</h2>
+<h2>Build Example</h2>
 * `git clone https://github.com/hazelcastInternsSummer14/hazelcast-jca-example.git` - Clone repo into the local
 * `cd hazelcast-jca-example`
-* `cp -R jboss/* $JBOSS_HOME/` - copy all JBoss requirements.
 * `mvn install war:war` - Create war file for example
+
+<h2>JBoss Configuration</h2>
+* `cp -R jboss/* $JBOSS_HOME/` - copy all JBoss requirements.
 * `cp target hazelcast-jca-example.war $JBOSS_HOME/standalone/deployments/` - Copy war to JBoss
-
-
-<h2>How to Run Sample Application</h2>
-* `$JBOSS_HOME/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 -c standalone-full.xml` - Run JBoss
+* `$JBOSS_HOME/bin/standalone.sh -c standalone-full.xml` - Run JBoss
 * Browse to `http://localhost:8080/hazelcast-jca-example/Hello`
+
+<h2>Glassfish Configuration</h2>
+* `cp -R glassfish/* $GLASSFISH_HOME/` - copy all Glassfish requirements.
+* `cp target hazelcast-jca-example.war $GLASSFISH_HOME/glassfish/domains/domain1/autodeploy/` - Copy war to Glassfish
+* `$GLASSFISH_HOME/bin/asadmin start-domain`
