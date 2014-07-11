@@ -13,7 +13,7 @@ You should have installed JBoss AS or JBoss EAP and Apache Maven on your system.
 
 <ul>
 	<li>`git clone https://github.com/hazelcastInternsSummer14/hazelcast-jca-example.git` - Clone repo into the local</li>
-	<li>`cd hazelcast-jca-example`</li>
+	<li>```cd hazelcast-jca-example```</li>
 	<li>`cp -R jboss/* $JBOSS_HOME/` - copy all JBoss requirements.</li>
 	<li>`mvn install war:war` - Create war file for example</li>
 	<li>`cp target hazelcast-jca-example.war $JBOSS_HOME/standalone/deployments/` - Copy war to JBoss</li>
